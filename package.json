@@ -1,0 +1,24 @@
+{
+  "name": "-notes-api-2324802010270",
+  "version": "1.0.0",
+  "description": "Thuc hanh dien toan dam may",
+  "main": "index.js",
+  "scripts": {
+  "start": "node src/server.js",
+  "test": "node --test"
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/truongthanhlam27072005-gif/-notes-api-2324802010270.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/truongthanhlam27072005-gif/-notes-api-2324802010270/issues"
+  },
+  "homepage": "https://github.com/truongthanhlam27072005-gif/-notes-api-2324802010270#readme",
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}

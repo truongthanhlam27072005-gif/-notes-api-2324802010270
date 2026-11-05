@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bài 1 - Hello Cloud API</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f1f5f9;
+      color: #0f172a;
+      line-height: 1.6;
+    }
+    header {
+      background: #0f172a;
+      color: white;
+      padding: 38px 20px;
+      text-align: center;
+    }
+    header h1 { margin: 0 0 8px; }
+    header p { color: #cbd5e1; }
+    main {
+      max-width: 960px;
+      margin: 25px auto;
+      padding: 0 15px;
+    }
+    section {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px #0000000a;
+    }
+    h2 { color: #1d4ed8; margin-top: 0; }
+    .table-wrap { overflow-x: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #dbeafe;
+      color: #1e3a8a;
+    }
+    li { margin-bottom: 12px; }
+    .note {
+      background: #eff6ff;
+      padding: 12px;
+      border-left: 4px solid #2563eb;
+    }
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>THỰC HÀNH ĐIỆN TOÁN ĐÁM MÂY</h1>
+    <p>Bài 1: Lập trình trên máy ảo đám mây đầu tiên</p>
+    <p>Hello Cloud API - GitHub Codespaces</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>1. Thông tin sinh viên</h2>
+      <p><strong>Họ tên:</strong>Trương Thànhn Lắm</p>
+      <p><strong>MSSV:</strong>2324802010270</p>
+      <p><strong>Lớp:</strong>D23CNTT02</p>
+      <p><strong>Ngày thực hiện:</strong> 05/11/2026</p>
+    </section>
+
+    <section>
+      <h2>2. Mục tiêu thực hành</h2>
+      <p>
+        Triển khai ứng dụng Hello Cloud API bằng
+        Node.js và Express trên GitHub Codespaces.
+        Quan sát tài nguyên đám mây và đối chiếu
+        với 5 đặc tính điện toán đám mây của NIST.
+      </p>
+    </section>
+
+    <section>
+      <h2>3. Bảng so sánh môi trường</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Tiêu chí</th>
+              <th>Máy cá nhân</th>
+              <th>Codespace</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Thời gian chuẩn bị</td>
+              <td>Điền số liệu thực tế</td>
+              <td>Điền số phút đo được</td>
+            </tr>
+            <tr>
+              <td>Số CPU, RAM</td>
+              <td>Điền thông số laptop</td>
+              <td>Điền thông số API trả về</td>
+            </tr>
+            <tr>
+              <td>Hệ điều hành</td>
+              <td>Windows 11</td>
+              <td>Linux - điền phiên bản API</td>
+            </tr>
+            <tr>
+              <td>Truy cập từ thiết bị khác</td>
+              <td>Cần cấu hình mạng hoặc triển khai dịch vụ</td>
+              <td>Truy cập qua URL chuyển tiếp cổng</td>
+            </tr>
+            <tr>
+              <td>Chi phí và cách đo</td>
+              <td>Chi phí thiết bị, điện, mạng</td>
+              <td>Hạn mức miễn phí; theo dõi core-hours và lưu trữ</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">
+        Số liệu CPU, RAM, thời gian và mức sử dụng
+        được ghi từ kết quả thực hành thực tế.
+      </p>
+    </section>
+
+    <section>
+      <h2>4. Năm đặc tính điện toán đám mây NIST</h2>
+      <ol>
+        <li>
+          <strong>On-demand self-service:</strong>
+          Sinh viên tự tạo Codespace trên GitHub
+          mà không cần nhân viên quản trị cấp máy.
+        </li>
+        <li>
+          <strong>Broad network access:</strong>
+          API có thể được truy cập bằng trình duyệt
+          trên laptop và điện thoại qua Internet.
+        </li>
+        <li>
+          <strong>Resource pooling:</strong>
+          GitHub cung cấp môi trường tính toán từ
+          hạ tầng tài nguyên dùng chung, sinh viên
+          không phải chọn máy chủ vật lý cụ thể.
+        </li>
+        <li>
+          <strong>Rapid elasticity:</strong>
+          Dịch vụ đám mây cho phép điều chỉnh tài nguyên
+          linh hoạt theo nhu cầu. Bài thực hành mới
+          minh họa bước cấp phát nhanh, chưa kiểm
+          chứng trực tiếp khả năng tự co giãn.
+        </li>
+        <li>
+          <strong>Measured service:</strong>
+          Mức sử dụng Codespaces được theo dõi
+          qua Billing Usage, gồm tài nguyên tính
+          toán và lưu trữ.
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>5. Kết quả thực hành</h2>
+      <p>
+        Đã xây dựng Hello Cloud API để hiển thị
+        hostname, hệ điều hành, CPU, RAM,
+        uptime và thời gian của môi trường chạy.
+      </p>
+      <p>
+        Đã kiểm tra truy cập từ điện thoại và
+        chuyển cổng về Private sau khi thử nghiệm.
+      </p>
+      <p>
+        <strong>Thời gian cấp phát Codespace:</strong>
+        Điền số giây/phút đo được.
+      </p>
+    </section>
+
+    <section>
+      <h2>6. Kết luận</h2>
+      <p>
+        GitHub Codespaces giúp chuẩn bị môi trường
+        lập trình từ xa, giảm nhu cầu cài đặt trực
+        tiếp trên máy cá nhân và hỗ trợ truy cập
+        ứng dụng qua Internet.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    Báo cáo thực hành Điện toán đám mây - Bài 1
+  </footer>
+</body>
+</html>
