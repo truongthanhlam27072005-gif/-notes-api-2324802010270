@@ -196,7 +196,239 @@
         ứng dụng qua Internet.
       </p>
     </section>
-  </main>
+  
+<!-- BẮT ĐẦU BÀI THỰC HÀNH 2 -->
+<section id="bai2">
+  <h2>BÀI 2: ẢO HÓA, CONTAINER VÀ CLOUDSIM PLUS</h2>
+
+  <p><strong>Sinh viên:</strong> Trương Thành Lâm</p>
+  <p><strong>MSSV:</strong> 2324802010270</p>
+  <p><strong>Lớp:</strong> D23CNTT02</p>
+
+  <h3>1. Mục tiêu thực hành</h3>
+  <p>
+    Đóng gói ứng dụng Hello Cloud API bằng Docker,
+    chạy nhiều container với giới hạn CPU và RAM,
+    đưa Docker image lên GitHub Container Registry,
+    đồng thời mô phỏng việc phân bổ máy ảo và
+    lập lịch tác vụ bằng CloudSim Plus.
+  </p>
+
+  <h3>2. Kết quả thực hành Docker</h3>
+
+  <p>
+    Docker image: notes-api:1.0
+  </p>
+
+  <p>
+    GitHub Container Registry:
+    <a href="https://github.com/users/truongthanhlam27072005-gif/packages/container/package/notes-api"
+       target="_blank" rel="noopener noreferrer">
+      Xem Docker image trên GHCR
+    </a>
+  </p>
+
+  <p>
+    Container notes1 sử dụng cổng 3000.
+    Container notes2 sử dụng cổng 3001,
+    giới hạn CPU 0.5 và RAM 128 MiB.
+  </p>
+
+  <h3>3. Bảng so sánh VM và Container</h3>
+
+  <div class="table-wrap">
+    <table>
+      <tr>
+        <th>Tiêu chí</th>
+        <th>Codespace (VM nền tảng)</th>
+        <th>Container notes2</th>
+      </tr>
+
+      <tr>
+        <td>Thời gian khởi động</td>
+        <td>Khoảng 10 phút (Bài 1)</td>
+        <td>Chưa điền số đo lệnh time</td>
+      </tr>
+
+      <tr>
+        <td>Kích thước</td>
+        <td>Hạn mức lưu trữ theo đề: 15 GB-tháng</td>
+        <td>Image: 251 MB disk usage, 63.3 MB content size</td>
+      </tr>
+
+      <tr>
+        <td>Nhân hệ điều hành</td>
+        <td>Hạ tầng VM có kernel hệ điều hành khách</td>
+        <td>Chia sẻ kernel với Docker host</td>
+      </tr>
+
+      <tr>
+        <td>Mức cô lập</td>
+        <td>Cô lập ở mức VM bằng hypervisor</td>
+        <td>Cô lập bằng namespaces và cgroups</td>
+      </tr>
+    </table>
+  </div>
+
+  <p class="note">
+    Lưu ý: Hạn mức GB-tháng không phải kích thước
+    thực tế của máy ảo. Codespaces cung cấp
+    môi trường phát triển container trên hạ tầng
+    do GitHub quản lý.
+  </p>
+
+  <h3>4. Kết quả mô phỏng CloudSim Plus</h3>
+
+  <p>
+    Mô phỏng sử dụng 1 Host với 8 lõi CPU,
+    cấu hình mặc định gồm 2 VM, mỗi VM 4 lõi,
+    và 4 Cloudlet.
+  </p>
+
+  <div class="table-wrap">
+    <table>
+      <tr>
+        <th>Lần</th>
+        <th>Thay đổi</th>
+        <th>Cloudlet hoàn thành</th>
+        <th>FinishTime (giây)</th>
+      </tr>
+
+      <tr>
+        <td>0</td>
+        <td>Mặc định, Time-Shared</td>
+        <td>4/4</td>
+        <td>20.10</td>
+      </tr>
+
+      <tr>
+        <td>1</td>
+        <td>Tăng VMS từ 2 lên 4</td>
+        <td>4 Cloudlet hiển thị</td>
+        <td>45.60 (cần xác nhận cấu hình)</td>
+      </tr>
+
+      <tr>
+        <td>2</td>
+        <td>Tăng CLOUDLETS từ 4 lên 8</td>
+        <td>Cần kiểm tra lại: ảnh hiện có 4</td>
+        <td>Chưa xác nhận</td>
+      </tr>
+
+      <tr>
+        <td>3</td>
+        <td>CloudletSchedulerSpaceShared</td>
+        <td>4/4</td>
+        <td>20.11</td>
+      </tr>
+    </table>
+  </div>
+
+  <p class="note">
+    Các kết quả cần được đối chiếu với cấu hình
+    Java của từng lần chạy. Nếu Cloudlet không
+    hoàn thành do thiếu tài nguyên, cần ghi nhận
+    và giải thích thay vì bỏ qua.
+  </p>
+
+  <h3>5. Nhận xét kết quả</h3>
+
+  <p>
+    Việc tăng số VM có thể làm thay đổi kết quả
+    mô phỏng, nhưng hiệu quả phụ thuộc vào
+    khả năng cấp phát tài nguyên của Host.
+  </p>
+
+  <p>
+    Khi tăng số Cloudlet mà không tăng tài nguyên,
+    các tác vụ có thể phải chia sẻ CPU hoặc chờ,
+    dẫn đến thời gian hoàn thành thay đổi.
+  </p>
+
+  <p>
+    Time-Shared cho phép các tác vụ chia sẻ thời gian
+    CPU. Space-Shared cấp lõi cho các tác vụ phù hợp,
+    còn tác vụ chưa đủ tài nguyên phải chờ.
+  </p>
+
+  <h3>6. Hình ảnh minh chứng</h3>
+
+  <p><strong>Lần 0: Cấu hình mặc định</strong></p>
+  <img src="cloudsim/run0.png"
+       alt="CloudSim Plus lần 0"
+       style="width:100%;height:auto;">
+
+  <p><strong>Lần 1: Nhân đôi số máy ảo</strong></p>
+  <img src="cloudsim/run1.png"
+       alt="CloudSim Plus lần 1"
+       style="width:100%;height:auto;">
+
+  <p><strong>Lần 2: Nhân đôi số Cloudlet</strong></p>
+  <img src="cloudsim/run2.png"
+       alt="CloudSim Plus lần 2"
+       style="width:100%;height:auto;">
+
+  <p><strong>Lần 3: Space-Shared Scheduler</strong></p>
+  <img src="cloudsim/run3.png"
+       alt="CloudSim Plus lần 3"
+       style="width:100%;height:auto;">
+
+  <h3>7. Câu hỏi phản biện</h3>
+
+  <p><strong>Câu 1: Vì sao notes2 có thể báo
+  RAM bằng host dù đã giới hạn 128 MiB?</strong></p>
+
+  <p>
+    Vì API os.totalmem() có thể đọc dung lượng
+    RAM của hệ điều hành host thay vì giới hạn
+    cgroups. Docker áp dụng giới hạn 128 MiB
+    cho container. Ứng dụng Node.js hoặc Java
+    cần kiểm tra tài nguyên thực tế, tránh
+    sử dụng vượt giới hạn gây OOMKilled.
+  </p>
+
+  <p><strong>Câu 2: Time-Shared và Space-Shared
+  khác nhau thế nào?</strong></p>
+
+  <p>
+    Time-Shared chia sẻ thời gian CPU giữa
+    các tác vụ, giúp nhiều tác vụ tiến triển
+    đồng thời. Space-Shared cấp tài nguyên
+    cho một số tác vụ, còn các tác vụ khác
+    phải chờ khi thiếu lõi CPU.
+  </p>
+
+  <p>
+    Nhà cung cấp dịch vụ giá rẻ có thể ưu tiên
+    chia sẻ tài nguyên để tăng mức sử dụng,
+    nhưng cần cân nhắc hiệu năng và chất lượng
+    dịch vụ cam kết.
+  </p>
+
+  <p><strong>Câu 3: Mô phỏng có ích gì
+  trước khi thuê hạ tầng thật?</strong></p>
+
+  <p>
+    Mô phỏng giúp đánh giá việc phân bổ VM,
+    số lượng tác vụ và chính sách lập lịch
+    mà không cần thuê máy chủ thực tế.
+    Tuy nhiên, kết quả có thể sai lệch do
+    độ trễ mạng, hiệu năng ổ đĩa, tải hệ thống
+    và lỗi phần cứng chưa được mô phỏng đầy đủ.
+  </p>
+
+  <h3>8. Kết luận Bài 2</h3>
+
+  <p>
+    Qua bài thực hành, sinh viên đã tìm hiểu
+    cách đóng gói và triển khai ứng dụng bằng
+    Docker, giới hạn tài nguyên container,
+    xuất bản image trên GHCR và nghiên cứu
+    mô phỏng phân bổ tài nguyên bằng CloudSim Plus.
+  </p>
+</section>
+<!-- KẾT THÚC BÀI THỰC HÀNH 2 -->
+</main>
 
   <footer>
     Báo cáo thực hành Điện toán đám mây - Bài 1
