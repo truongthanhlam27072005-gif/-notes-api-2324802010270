@@ -201,7 +201,7 @@
 <section id="bai2">
   <h2>BÀI 2: ẢO HÓA, CONTAINER VÀ CLOUDSIM PLUS</h2>
 
-  <p><strong>Sinh viên:</strong> Trương Thành Lâm</p>
+  <p><strong>Sinh viên:</strong> Trương Thành Lắm</p>
   <p><strong>MSSV:</strong> 2324802010270</p>
   <p><strong>Lớp:</strong> D23CNTT02</p>
 
@@ -247,7 +247,7 @@
       <tr>
         <td>Thời gian khởi động</td>
         <td>Khoảng 10 phút (Bài 1)</td>
-        <td>Chưa điền số đo lệnh time</td>
+        <td>0.405</td>
       </tr>
 
       <tr>
@@ -428,6 +428,102 @@
   </p>
 </section>
 <!-- KẾT THÚC BÀI THỰC HÀNH 2 -->
+
+<section id="bai3">
+  <h2>BÀI 3: LƯU TRỮ PHÂN TÁN</h2>
+
+  <h3>1. Kết quả thực hành</h3>
+  <p>
+    Đã kết nối Notes API với MongoDB Atlas
+    và Supabase Storage, thực hiện CRUD,
+    tải tệp và lưu URL đính kèm.
+  </p>
+
+  <h3>2. Hiệu quả chỉ mục MongoDB</h3>
+
+  <div class="table-wrap">
+    <table>
+      <tr>
+        <th>Tiêu chí</th>
+        <th>Quét toàn bộ</th>
+        <th>Dùng chỉ mục</th>
+      </tr>
+      <tr>
+        <td>docsExamined</td>
+        <td>2000</td>
+        <td>571</td>
+      </tr>
+      <tr>
+        <td>nReturned</td>
+        <td>571</td>
+        <td>571</td>
+      </tr>
+      <tr>
+        <td>executionTimeMillis</td>
+        <td>1 ms</td>
+        <td>1 ms</td>
+      </tr>
+    </table>
+  </div>
+
+  <p>
+    <strong>
+      Hệ số giảm tài liệu quét: 3,50 lần.
+    </strong>
+  </p>
+
+  <p>
+    Chỉ mục giúp giảm 71,45% số tài liệu
+    cần đọc. Thời gian của cả hai truy vấn
+    là 1 ms nên chưa quan sát được khác biệt
+    rõ ràng về thời gian.
+  </p>
+
+  <h3>3. Câu hỏi phản biện</h3>
+
+  <h4>Câu 1: Khi dữ liệu tăng lên 2 triệu?</h4>
+  <p>
+    Nếu giữ nguyên tỷ lệ chọn lọc của thí
+    nghiệm, quét toàn bộ có thể cần kiểm tra
+    khoảng 2 triệu tài liệu, trong khi
+    dùng chỉ mục khoảng 571 nghìn tài liệu.
+    Đây chỉ là ước lượng, không phải số đo.
+    Với giới hạn 100 thao tác/giây của
+    tình huống đề bài, truy vấn kém hiệu quả
+    có thể làm tăng tải hệ thống và độ trễ.
+  </p>
+
+  <h4>Câu 2: Vì sao dùng Supabase Storage?</h4>
+  <p>
+    Supabase Storage phù hợp để lưu tệp
+    đính kèm và cung cấp đường dẫn truy cập.
+    MongoDB chỉ cần lưu URL và thông tin
+    ghi chú, giúp tài liệu gọn hơn, tránh
+    phải lưu nội dung tệp trực tiếp
+    trong tài liệu NoSQL.
+  </p>
+
+  <h4>Câu 3: Atlas khác HDFS thế nào?</h4>
+  <p>
+    Cả hai dùng nhân bản để tăng khả năng
+    chịu lỗi và tính sẵn sàng của dữ liệu.
+    MongoDB Atlas nhân bản dữ liệu giữa
+    các nút Primary và Secondary.
+    HDFS nhân bản các block của tệp trên
+    nhiều DataNode; NameNode quản lý metadata.
+    Số 3 giúp cân bằng khả năng chịu lỗi
+    và chi phí lưu trữ.
+  </p>
+
+  <h3>4. Sơ đồ so sánh Atlas và HDFS</h3>
+  <p>
+    <a href="https://github.com/truongthanhlam27072005-gif/-notes-api-2324802010270/blob/main/docs/atlas-hdfs.md">
+      Xem sơ đồ MongoDB Atlas - HDFS
+    </a>
+  </p>
+
+</section>
+
 </main>
 
   <footer>
